@@ -2,12 +2,21 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const morgan = require('morgan');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: 'uploads',
+    filename: (res, file, cb) => {
+        cb(null, new Date().getTime() + path.extname(file.originalname));
+    }
+});
 
 //database
 require('../db');
 
 //config
 app.set('port', process.env.PORT | 3000);
+app.use(multer({storage}).single('imagen'));
 
 
 //middleware

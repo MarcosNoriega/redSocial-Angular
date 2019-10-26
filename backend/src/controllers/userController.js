@@ -6,9 +6,9 @@ userController.login = async (req, res) => {
     const user = new User(req.body);
     user.password = await user.encriptpassword(user.password);
 
-    // user.save();
+    await user.save();
 
-    const token = await jwt.sign({id: user._id}, 'ark4Photo', {
+    const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
         expiresIn: 60 * 60 * 24
     });
     
@@ -24,12 +24,12 @@ userController.auth = async (req, res) => {
         return res.status(401).json({auth: false, massaje: 'user no found'});
     } 
 
-    const validPassword = await user.comparePassword(password);
+    const validPassword = await user.comparePassword(password, user.password);
     if (!validPassword) {
         return res.status(401).json({auth: false, massaje: 'password incorrect'});
     }
 
-    const token = await jwt.sign({id: user._id}, 'ark4Photo', {
+    const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
         expiresIn: 60 * 60 * 24
     });
 

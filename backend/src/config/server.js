@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const morgan = require('morgan');
 const multer = require('multer');
+const cors = require('cors');
 
 const storage = multer.diskStorage({
     destination: 'uploads',
@@ -17,6 +18,7 @@ require('../db');
 //config
 app.set('port', process.env.PORT | 3000);
 app.use(multer({storage}).single('imagen'));
+app.use(cors());
 
 
 //middleware

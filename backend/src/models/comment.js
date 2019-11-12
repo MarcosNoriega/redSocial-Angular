@@ -4,9 +4,8 @@ const ObjectId = Schema.ObjectId;
 
 const Comentario = new Schema({
     imagen_id: ObjectId,
-    email: String,
+    user_id: ObjectId,
     gravatar: String,
-    nombre: String,
     comentario: String,
     timestamp: {type: Date, default: Date.now},
 

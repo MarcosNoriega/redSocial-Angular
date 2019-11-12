@@ -11,36 +11,18 @@ cloudinary.config({
 });
 
 imagenController.index = async (req, res) => {
-    const user = await User.findById(req.userId);
-
-    if (!user) {
-        return res.status(401).json({
-            auth: false,
-            message: 'No user found'
-        });
-    }
-
     const imagenes = await Image.find({userId: req.userId});
 
     return res.json(imagenes);
 }
 
 imagenController.create = async (req, res) => {
-    const user = await User.findById(req.userId);
-
-    if (!user) {
-        return res.status(401).json({
-            auth: false,
-            message: 'No user found'
-        });
-    }
-
     const {nombre, descripcion} = req.body;
 
     const result = await cloudinary.v2.uploader.upload(req.file.path);
 
     const image = new Image({
-        userId: user._id,
+        userId: req.userId,
         public_id: result.public_id,
         nombre,
         descripcion,
@@ -53,5 +35,15 @@ imagenController.create = async (req, res) => {
 
     res.json({message: 'successfully saved image', image});
 }
+
+imagenController.searchXalbum = async (req, res) => {
+    const {idAlbum} = req.params;
+    const image = await Image.find({AlbumId: idAlbum});
+
+    return res.json(image);
+}
+
+
+
 
 module.exports = imagenController;

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sombra">
+  <a class="navbar-brand" href="#">Ark4Social</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['contenido']" routerLinkActive="router-link-active"  *ngIf="auth"><i class="fa fa-home"></i> Inicio</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="redSocial.auth"><i class="fa fa-user"></i> {{nombre}} {{apellido}}</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#"><i class="fa fa-user-circle"></i> Mi Perfil</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['albumes']"><i class="fa fa-images"></i> Mis albumes</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-image"></i> Mis Fotos</a>
+        </div>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['mesajes']" *ngIf="redSocial.auth"><i class="fa fa-comments"></i> Mensajes</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['login']" *ngIf="!redSocial.auth"><i class="fa fa-sign-in-alt"></i> Iniciar Sesión</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['registrar']" *ngIf="!redSocial.auth"><i class="fa fa-user-plus"></i> Registrar</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+</nav>

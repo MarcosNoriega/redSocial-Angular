@@ -1,0 +1,78 @@
+<div class="contaner mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card sombra">
+        <div class="card-header bg-success text-white text-center">
+          <h3>Registrar</h3>
+        </div>
+
+        <div class="card-body bg-dark text-white">
+          <form (ngSubmit)="registrarUser()" #formRegistro="ngForm">
+            <div class="form-group">
+              <label for="Nombre">Nombre</label>
+
+              <input type="text" 
+              name="name" 
+              [(ngModel)]="user.name" 
+              #nombre="ngModel"
+              [ngClass]="{'is-invalid': nombre.invalid && nombre.touched}"
+              class="form-control"
+              required>
+
+              <div *ngIf="nombre.invalid && nombre.touched" class="alerta">
+                Debes completar el nombre.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="Apellido">Apellido</label>
+              <input type="text" 
+              name="surname" 
+              [(ngModel)]="user.surname" 
+              class="form-control" 
+              #apellido="ngModel"
+              [ngClass]="{'is-invalid': apellido.invalid && apellido.touched}"
+              required>
+
+              <div *ngIf="apellido.invalid && apellido.touched" class="alerta">
+                Debes completar el apellido.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="Nombre">Mail</label>
+              <input type="email" 
+              name="mail" 
+              [(ngModel)]="user.mail" 
+              class="form-control"
+              #mail="ngModel"
+              [ngClass]="{'is-invalid': mail.invalid && mail.touched}" 
+              required>
+
+              <div *ngIf="mail.invalid && mail.touched" class="alerta">
+                Debes completar el mail.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="Nombre">Password</label>
+              <input type="password" 
+              name="password" 
+              [(ngModel)]="user.password" 
+              class="form-control" 
+              #password="ngModel"
+              [ngClass]="{'is-invalid': password.invalid && password.touched}"
+              required>
+
+              <div *ngIf="password.invalid && password.touched" class="alerta">
+                Debes completar el password.
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="formRegistro.invalid">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="row">
+  <button class="btn btn-primary sombra" data-toggle="modal" data-target="#exampleModal">Crear nuevo album</button>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-white">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Album</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="enviarAlbum()">
+        <div class="modal-body bg-dark">
+          <div class="form-group">
+            <label for="">Nombre</label>
+            <input type="text"
+             class="form-control" 
+             name="nombre" 
+             [(ngModel)]="album.nombre" 
+             #nombre="ngModel"
+             [ngClass]="{'is-invalid': nombre.invalid && nombre.touched}"
+             required>
+
+            <div *ngIf="nombre.invalid && nombre.touched" class="alerta">
+              Debes completar el nombre.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Descripción</label>
+            <textarea cols="30" rows="10" class="form-control" name="description" [(ngModel)]="album.description"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer bg-dark">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="enviarAlbum()">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  
+
+<div class="row" *ngIf="albumes.length == 0">
+  <div class="col">
+    <h1 class="text-center display-4" style="margin-top: 150px;">No tienes ningún album creado</h1>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-3" *ngFor="let album of albumes">
+    <div class="card sombra">
+      <div class="card-header">
+        <h1>{{album.nombre}}</h1>
+      </div>
+
+      <div class="card-body">
+        <p>{{album.description}}</p>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn btn-info" (click)="verAlbum(album._id)"><i class="fa fa-eye"></i></button>
+        <button class="btn btn-danger ml-2" (click)="deleteAlbum(album._id)"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

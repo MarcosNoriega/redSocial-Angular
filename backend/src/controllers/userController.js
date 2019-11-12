@@ -2,7 +2,7 @@ const userController = {};
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-userController.login = async (req, res) => {
+userController.register = async (req, res) => {
     const user = new User(req.body);
     user.password = await user.encriptpassword(user.password);
 
@@ -36,6 +36,14 @@ userController.auth = async (req, res) => {
     
     return res.json({auth: true, user, token});
 
+}
+
+userController.logout = (req, res) => {
+    jwt.sign({id: req.userId}, process.env.SECRET_KEY, {
+        expiresIn: 0
+    });
+
+    return res.json({auth: false, messaje: 'user logout'});
 }
 
 

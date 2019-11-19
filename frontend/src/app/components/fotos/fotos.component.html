@@ -1,0 +1,86 @@
+<div class="row">
+  <button class="btn btn-primary sombra" data-toggle="modal" data-target="#exampleModal">Subir Foto</button>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-white">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title" id="exampleModalLabel">Subir nueva foto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #formFotos="ngForm">
+        <div class="modal-body bg-dark">
+          <div class="form-group">
+            <label for="">Nombre</label>
+            <input 
+            type="text" 
+            class="form-control"
+            name="nombre"
+            #nombre="ngModel"
+            [(ngModel)]="fot.nombre"
+            [ngClass]="{'is-invalid': nombre.touched && nombre.invalid}"
+            required>
+
+            <div *ngIf="nombre.invalid && nombre.touched" class="alerta">
+              Debes completar el nombre.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="">Album</label>
+            <Select class="form-control">
+              <option [value]="album._id" *ngFor="let album of albumes">{{album.nombre}}</option>
+            </Select>
+          </div>
+        
+          <div class="form-group">
+            <label for="">Descripción</label>
+            <textarea 
+            name="descripcion" 
+            class="form-control" 
+            [(ngModel)]="fot.descripcion"
+            cols="30" 
+            rows="5"></textarea>
+          </div>
+
+          <div class="form-group">
+            <input type="file" name="image" class="d-none" (change)="onChange($event)" #fotoInput>
+            <img [src]="fotoSelecionada || 'assets/image/no-image.png'" alt="" class="card-img-top" height="400px" (click)="fotoInput.click()">
+          </div>
+        </div>
+        <div class="modal-footer bg-dark">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="subirFoto()">Subir</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="fotos.length == 0">
+  <div class="col">
+    <h1 class="text-center display-4" style="margin-top: 150px;">No tienes ninguna foto subida</h1>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-4" *ngFor="let foto of fotos">
+    <div class="card">
+      <img [src]="foto.ruta" class="card-img-top" alt="">
+    </div>
+
+    <div class="card-body">
+      <h5>{{foto.nombre}}</h5>
+      <p>{{foto.descripcion}}</p>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-info" (click)="verFoto(foto._id)"><i class="fa fa-eye"></i></button>
+      <button class="btn btn-danger ml-2" (click)="deleteFoto(foto._id)"><i class="fa fa-trash"></i></button>
+    </div>
+  </div>
+</div>

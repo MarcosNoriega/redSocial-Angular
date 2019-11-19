@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AlbumesComponent } from './components/albumes/albumes.component';
 import { AlbumComponent } from './components/album/album.component';
+import { FotosComponent } from './components/fotos/fotos.component';
 
 const routes: Routes = [
   {path: 'contenido', component: ContenidoComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'registrar', component: RegisterComponent},
   {path: 'albumes', component: AlbumesComponent},
   {path: 'album/:id', component: AlbumComponent},
+  {path: 'fotos', component: FotosComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'contenido'}
 ];
 

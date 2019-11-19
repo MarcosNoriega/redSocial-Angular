@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('Apellido', res['user'].surname);
       this.redSocial.actualizarAuth(res['auth']);
       this.router.navigate(['contenido']);
+    }, err => {
+      if (err['status'] === 401) {
+        console.log('object');
+      }
     });
   }
 

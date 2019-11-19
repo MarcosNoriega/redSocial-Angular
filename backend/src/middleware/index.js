@@ -39,4 +39,18 @@ middleware.verifyToken = async (req, res, next) => {
     
 }
 
+middleware.verifyMail = async (req, res, next) => {
+    const {mail} = req.body;
+    const user = User.findOne({mail});
+
+    if (user) {
+        return res.status(401).json({
+            auth: false,
+            message: 'this email has already been registered'
+        })
+    }
+
+    next();
+}
+
 module.exports = middleware;

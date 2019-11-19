@@ -43,6 +43,14 @@ imagenController.searchXalbum = async (req, res) => {
     return res.json(image);
 }
 
+imagenController.delete = async (req, res) => {
+    const {id} = req.params;
+    const image = await Image.findByIdAndDelete(id);
+    await cloudinary.v2.uploader.destroy(image.public_id);
+
+    return res.json({message: 'successfull', image});
+}
+
 
 
 

@@ -6,13 +6,14 @@ const commentController = require('../controllers/commentController');
 const albumController = require('../controllers/albumController');
 const middleware = require('../middleware');
 
-router.post('/register', userController.register);
+router.post('/register', middleware.verifyMail, userController.register);
 router.post('/auth', userController.auth);
 router.post('/logout', middleware.verifyToken, userController.logout);
 
 router.get('/images', middleware.verifyToken, imageController.index);
 router.post('/images/create', middleware.verifyToken, imageController.create);
 router.get('/images/album/:id', middleware.verifyToken, imageController.searchXalbum);
+router.delete('/images/delete/:id', middleware.verifyToken, imageController.delete);
 
 router.post('/comment/create/:idImagen', middleware.verifyToken, commentController.create);
 router.delete('/comment/delete/:id', middleware.verifyToken, commentController.delete);

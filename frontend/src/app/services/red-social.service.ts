@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { User, Album } from '../interfaces/interface';
+import { User, Album, Fotos } from '../interfaces/interface';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -52,6 +52,29 @@ export class RedSocialService {
   }
 
   getImagenes(id: string) {
-    return this.http.get(this.url + `images/album/${id}`, {headers: this.header})
+    return this.http.get(this.url + `images/album/${id}`, {headers: this.header});
+  }
+
+  getAllImagenes() {
+    return this.http.get(this.url + `images`, {headers: this.header});
+  }
+
+  subirFoto(Foto: Fotos) {
+    const formData = new FormData();
+    formData.append('nombre', Foto.nombre);
+    formData.append('descripcion', Foto.descripcion);
+    formData.append('imagen', Foto.imagen);
+
+    return this.http.post(this.url + 'images/create', formData, {headers: this.header})
+    .pipe(map(res => {
+      return res['image'];
+    }));
+  }
+
+  deleteFoto(id: string) {
+    return this.http.delete(this.url + `images/delete/${id}`, {headers: this.header})
+    .pipe(map(res => {
+      return res['image'];
+    }));
   }
 }

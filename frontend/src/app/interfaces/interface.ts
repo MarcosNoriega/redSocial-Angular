@@ -1,21 +1,31 @@
 export interface Imagen {
-    userId: String;
-    public_id: String;
-    nombre: String;
-    descripcion: String;
-    ruta: String;
+    userId: string;
+    public_id: string;
+    nombre: string;
+    descripcion: string;
+    ruta: string;
 }
 
 export interface User {
-    name: String;
-    surname: String;
-    mail: String;
-    password: String;
+    name: string;
+    surname: string;
+    mail: string;
+    password: string;
 }
 
 export interface Album {
-    _id: String;
-    nombre: String;
-    description: String;
-    user_id: String;
+    _id: string;
+    nombre: string;
+    description: string;
+    user_id: string;
+}
+
+export interface Fotos {
+    _id: string;
+    nombre: string;
+    descripcion: string;
+    AlbumId: string;
+    userId: string;
+    ruta: string;
+    imagen: File;
 }

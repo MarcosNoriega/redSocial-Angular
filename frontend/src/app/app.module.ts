@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AlbumesComponent } from './components/albumes/albumes.component';
 import { AlbumComponent } from './components/album/album.component';
+import { FotosComponent } from './components/fotos/fotos.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AlbumComponent } from './components/album/album.component';
     LoginComponent,
     RegisterComponent,
     AlbumesComponent,
-    AlbumComponent
+    AlbumComponent,
+    FotosComponent
   ],
   imports: [
     BrowserModule,

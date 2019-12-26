@@ -7,30 +7,36 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['contenido']" routerLinkActive="router-link-active"  *ngIf="auth"><i class="fa fa-home"></i> Inicio</a>
+        <a class="nav-link" [routerLink]="['contenido']" routerLinkActive="router-link-active"  *ngIf="auth.loggedin()"><i class="fa fa-home"></i> Inicio</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="redSocial.auth"><i class="fa fa-user"></i> {{nombre}} {{apellido}}</a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="auth.loggedin()"><i class="fa fa-user"></i> {{nombre}} {{apellido}}</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#"><i class="fa fa-user-circle"></i> Mi Perfil</a>
+          <a class="dropdown-item" [routerLink]="['perfil']" routerLinkActive="router-link-active" ><i class="fa fa-user-circle"></i> Mi Perfil</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" [routerLink]="['albumes']"><i class="fa fa-images"></i> Mis albumes</a>
           <a class="dropdown-item" [routerLink]="['fotos']" routerLinkActive="router-link-active" ><i class="fa fa-image"></i> Mis Fotos</a>
+          <a class="dropdown-item" [routerLink]="['favoritas']" routerLinkActive="router-link-active" ><i class="fa fa-image"></i> Imagenes que me gustan</a>
         </div>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['mesajes']" *ngIf="redSocial.auth"><i class="fa fa-comments"></i> Mensajes</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['login']" *ngIf="!redSocial.auth"><i class="fa fa-sign-in-alt"></i> Iniciar Sesión</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['registrar']" *ngIf="!redSocial.auth"><i class="fa fa-user-plus"></i> Registrar</a>
-      </li>
+      <!--<li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['mesajes']" *ngIf="auth.loggedin()"><i class="fa fa-comments"></i> Mensajes</a>
+      </li>-->
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['login']" *ngIf="!auth.loggedin()"><i class="fa fa-sign-in-alt"></i> Iniciar Sesión</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['registrar']" *ngIf="!auth.loggedin()"><i class="fa fa-user-plus"></i> Registrar</a>
+          </li>
+          <li class="nav-item" *ngIf="auth.loggedin()">
+            <a class="nav-link" (click)="auth.logout()" style="cursor: pointer"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
+          </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 ml-4" *ngIf="auth.loggedin()">
+      <input class="form-control mr-sm-2" type="text" placeholder="Buscar" #termino>
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit" (click)="search(termino.value)"><i class="fa fa-search"></i></button>
     </form>
   </div>
 </nav>

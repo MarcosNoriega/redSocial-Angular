@@ -1,0 +1,16 @@
+<div class="row" *ngIf="loading">
+  <div class="col">
+    <div class="d-flex justify-content-center align-items-center">
+      <i class="fa fa-5x fa-spin fa-spinner"></i>
+
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="fotos.length == 0 && !loading">
+  <div class="col">
+    <h1 class="text-center display-4" style="margin-top: 150px;">No tienes ninguna foto subida</h1>
+  </div>
+</div>
+
+<app-tarjeta2 [fotos]="fotos"></app-tarjeta2>

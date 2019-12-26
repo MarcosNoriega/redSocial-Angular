@@ -35,4 +35,11 @@ albumController.show = async (req, res) => {
     return res.json(album);
 }
 
+albumController.update = async (req, res) => {
+    const {id} = req.params;
+    const album = await Album.findByIdAndUpdate(id, req.body);
+
+    res.json({message: 'successfull', album});
+}
+
 module.exports = albumController;

@@ -18,9 +18,12 @@ export class AlbumesComponent implements OnInit {
     user_id: ''
   };
 
+  loading = true;
+
   constructor(private redSocial: RedSocialService, private router: Router) {
     redSocial.getAlbumes().subscribe((res: Album[]) => {
       this.albumes.push(...res);
+      this.loading = false;
     });
    }
 
@@ -55,6 +58,10 @@ export class AlbumesComponent implements OnInit {
       description: '',
       user_id: ''
     };
+  }
+
+  editAlbum(id: string) {
+    this.router.navigate(['/album', 'edit', id]);
   }
 
 }

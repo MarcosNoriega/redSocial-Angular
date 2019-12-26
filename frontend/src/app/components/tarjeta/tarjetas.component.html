@@ -1,0 +1,25 @@
+<div class="row mt-4">
+  <div class="col-md-6 col-lg-4" *ngFor="let foto of fotos">
+    <div class="card sombra">
+      <img [src]="foto.ruta" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5>{{foto.nombre}}</h5>
+        <p>{{foto.descripcion}}</p>
+      </div>
+      <div class="card-footer">
+        <div class="row justify-content-between">
+          <div class="col-8">
+              <button class="btn btn-info" (click)="verFoto(foto._id)" data-toggle="tooltip" data-placement="top" title="Ver Imagen"><i class="fa fa-eye"></i></button>
+              <button class="btn btn-warning ml-2" (click)="editFoto(foto._id)" data-toggle="tooltip" data-placement="top" title="Editar Imagen"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-danger ml-2" (click)="deleteFoto(foto._id)" data-toggle="tooltip" data-placement="top" title="Borrar"><i class="fa fa-trash"></i></button>
+          </div>
+    
+          <div class="col-4">
+            <i class="fa fa-heart"></i> {{foto.likes}}
+            <i class="fa fa-eje ml-3"></i> {{foto.views}}
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>

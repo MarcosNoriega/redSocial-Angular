@@ -1,0 +1,24 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Seguidores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Siguiendo</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let user1 of usersSeguidores"><img src="http://gravatar.com/avatar/{{user1.gravatar}}?d=monsterid&s=50" alt=""> {{user1.name}}  {{user1.surname}}</li>
+    </ul>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let user2 of usersSiguiendo">
+        <img src="http://gravatar.com/avatar/{{user2.gravatar}}?d=monsterid&s=50" alt=""> 
+        {{user2.name}}  {{user2.surname}}
+        <button class="btn btn-danger btn-sm mr-auto" (click)="noSeguir(user2._id)">Dejar de seguir</button>
+      </li>
+    </ul>
+  </div>
+</div>

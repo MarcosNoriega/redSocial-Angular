@@ -17,3 +17,10 @@ body {
     font-size: 12px;
     color: #FFA5A5;
 }
+
+.imgRedonda {
+    width:200px;
+    height:200px;
+    border-radius:150px;
+    border:10px solid #666;
+}

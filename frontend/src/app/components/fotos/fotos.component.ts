@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Fotos, Album } from '../../interfaces/interface';
 import { RedSocialService } from 'src/app/services/red-social.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-fotos',
@@ -13,10 +14,13 @@ export class FotosComponent implements OnInit {
     _id: '',
     nombre: '',
     descripcion: '',
-    AlbumId: '',
+    albumId: '',
     userId: '',
     ruta: '',
-    imagen: null
+    imagen: null,
+    likes: 0,
+    publico: false,
+    views: 0
   };
 
   fotos: Fotos[] = [];
@@ -25,7 +29,9 @@ export class FotosComponent implements OnInit {
 
   fotoSelecionada: ArrayBuffer | String;
 
-  constructor(private redSocial: RedSocialService) {
+  loading = true;
+
+  constructor(private redSocial: RedSocialService, private router: Router, private activatedRoute: ActivatedRoute) {
     redSocial.getAlbumes().subscribe((res: Album[]) => {
       this.albumes.push(...res);
       console.log(this.albumes);
@@ -34,6 +40,7 @@ export class FotosComponent implements OnInit {
     redSocial.getAllImagenes().subscribe((res: Fotos[]) => {
       this.fotos.push(...res);
       console.log(this.fotos);
+      this.loading = false;
     });
   }
 
@@ -52,8 +59,10 @@ export class FotosComponent implements OnInit {
     }
   }
 
-  subirFoto() {
+  subirFoto(albumId: string) {
+    this.fot.albumId = albumId;
     this.redSocial.subirFoto(this.fot).subscribe((res: Fotos) => {
+      console.log(res);
       this.fotos.push(res);
       this.limpiarForm();
     });
@@ -64,10 +73,13 @@ export class FotosComponent implements OnInit {
       _id: '',
       nombre: '',
       descripcion: '',
-      AlbumId: '',
+      albumId: '',
       userId: '',
       ruta: '',
-      imagen: null
+      imagen: null,
+      likes: 0,
+      publico: false,
+      views: 0
     };
   }
 
@@ -78,6 +90,14 @@ export class FotosComponent implements OnInit {
       });
 
     }
+  }
+
+  verFoto(id: string) {
+    this.router.navigate(['foto', id]);
+  }
+
+  editFoto(id: string) {
+    this.router.navigate(['foto', 'edit', id]);
   }
 
 }

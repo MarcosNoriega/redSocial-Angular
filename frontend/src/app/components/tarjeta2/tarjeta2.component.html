@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-4 mt-3" *ngFor="let foto of fotos" (click)="mostrarFoto(foto._id)">
+    <div class="card sombra">
+      <img [src]="foto.ruta" alt="" class="card-img-top">
+
+      <div class="card-body">
+        <h4 class="d-flex justify-content-start">{{foto.nombre}}</h4>
+      </div>
+
+      <div class="card-footer">
+          <i class="fa fa-heart"></i> {{foto.likes}}
+          <i class="fa fa-eye ml-3"></i> {{foto.views}}
+      </div>
+    </div>
+  </div>
+</div>

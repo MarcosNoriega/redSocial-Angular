@@ -31,11 +31,11 @@
 
           <div class="form-group">
             <label for="">Album</label>
-            <Select class="form-control">
+            <Select class="form-control" name="albumId" #album>
               <option [value]="album._id" *ngFor="let album of albumes">{{album.nombre}}</option>
             </Select>
           </div>
-        
+
           <div class="form-group">
             <label for="">Descripción</label>
             <textarea 
@@ -46,14 +46,19 @@
             rows="5"></textarea>
           </div>
 
+          <div class="form-check form-check-inline">
+            <input type="checkbox" name="publico" id="" class="form-check-input" [(ngModel)]="fot.publico">
+            <label for="" class="form-check-label">Público</label>
+          </div>
+          
           <div class="form-group">
             <input type="file" name="image" class="d-none" (change)="onChange($event)" #fotoInput>
             <img [src]="fotoSelecionada || 'assets/image/no-image.png'" alt="" class="card-img-top" height="400px" (click)="fotoInput.click()">
           </div>
         </div>
         <div class="modal-footer bg-dark">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="subirFoto()">Subir</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cerrar</button>
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="subirFoto(album.value)">Subir</button>
         </div>
 
       </form>
@@ -61,26 +66,19 @@
   </div>
 </div>
 
-<div class="row" *ngIf="fotos.length == 0">
+<div class="row" *ngIf="loading">
+  <div class="col">
+    <div class="d-flex justify-content-center align-items-center">
+      <i class="fa fa-5x fa-spin fa-spinner"></i>
+
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="fotos.length == 0 && !loading">
   <div class="col">
     <h1 class="text-center display-4" style="margin-top: 150px;">No tienes ninguna foto subida</h1>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-4" *ngFor="let foto of fotos">
-    <div class="card">
-      <img [src]="foto.ruta" class="card-img-top" alt="">
-    </div>
-
-    <div class="card-body">
-      <h5>{{foto.nombre}}</h5>
-      <p>{{foto.descripcion}}</p>
-    </div>
-
-    <div class="card-footer">
-      <button class="btn btn-info" (click)="verFoto(foto._id)"><i class="fa fa-eye"></i></button>
-      <button class="btn btn-danger ml-2" (click)="deleteFoto(foto._id)"><i class="fa fa-trash"></i></button>
-    </div>
-  </div>
-</div>
+<app-tarjetas [fotos]="fotos" class="mt-4"></app-tarjetas>

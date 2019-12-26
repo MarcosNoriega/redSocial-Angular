@@ -1,0 +1,24 @@
+<h3>Resultado de la busqueda de "{{termino}}"</h3>
+<hr>
+
+<div class="row" *ngIf="fotos.length == 0 && users.length == 0 && !loading">
+  <div class="col">
+    <h1 class="text-center display-4" style="margin-top: 150px;">No se obtuvieron resultados en la busqueda</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let user of users">
+    <div class="card" (click)="visitarPerfil(user._id)" style="cursor: pointer">
+      <img src="http://gravatar.com/avatar/{{user.gravatar}}?d=monsterid&s=200" alt="" class="img-card-top imgRedonda ml-5">
+
+      <div class="card-body">
+        <h3>{{user.name}} {{user.surname}}</h3>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<app-tarjeta2 [fotos]="fotos"></app-tarjeta2>

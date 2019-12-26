@@ -13,7 +13,17 @@ import { RegisterComponent } from './components/register/register.component';
 import { AlbumesComponent } from './components/albumes/albumes.component';
 import { AlbumComponent } from './components/album/album.component';
 import { FotosComponent } from './components/fotos/fotos.component';
+import { FotoComponent } from './components/foto/foto.component';
+import { FotoEditComponent } from './components/foto-edit/foto-edit.component';
+import { TarjetasComponent } from './components/tarjeta/tarjetas.component';
+import { FavoritasComponent } from './components/favoritas/favoritas.component';
 
+import { AuthGuard } from './auth.guard';
+import { FotosUserComponent } from './components/fotos-user/fotos-user.component';
+import { Tarjeta2Component } from './components/tarjeta2/tarjeta2.component';
+import { PanelSegidoresComponent } from './components/panel-segidores/panel-segidores.component';
+import { AlbumEditComponent } from './components/album-edit/album-edit.component';
+import { SearchComponent } from './components/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +34,16 @@ import { FotosComponent } from './components/fotos/fotos.component';
     RegisterComponent,
     AlbumesComponent,
     AlbumComponent,
-    FotosComponent
+    FotosComponent,
+    FotoComponent,
+    FotoEditComponent,
+    TarjetasComponent,
+    FavoritasComponent,
+    FotosUserComponent,
+    Tarjeta2Component,
+    PanelSegidoresComponent,
+    AlbumEditComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +51,7 @@ import { FotosComponent } from './components/fotos/fotos.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

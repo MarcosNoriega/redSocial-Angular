@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../interfaces/interface';
-import { RedSocialService } from 'src/app/services/red-social.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -12,21 +12,26 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   user: User = {
+    _id: '',
     name: '',
     surname: '',
     mail: '',
-    password: ''
+    password: '',
+    seguidores: 0
   };
 
-  constructor(private redSocial: RedSocialService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   registrarUser() {
-    this.redSocial.registrarUser(this.user).subscribe(res => {
+    this.auth.registrarUser(this.user).subscribe(res => {
       localStorage.setItem('token', res['token']);
-      this.redSocial.actualizarAuth(res['auth']);
+      localStorage.setItem('Nombre', res['user'].name);
+      localStorage.setItem('Apellido', res['user'].surname);
+      localStorage.setItem('UserId', res['user']._id);
+      // this.redSocial.actualizarAuth(res['auth']);
       this.router.navigate(['contenido']);
     });
   }

@@ -8,6 +8,7 @@ const Comentario = new Schema({
     gravatar: String,
     comentario: String,
     timestamp: {type: Date, default: Date.now},
+    modificado: {type: Boolean, defaul: false}
 
 });
 

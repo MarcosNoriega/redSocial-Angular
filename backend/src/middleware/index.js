@@ -25,14 +25,15 @@ middleware.verifyToken = async (req, res, next) => {
 
     req.userId = decode.id;
 
-    const user = User.findById(req.userId);
-
+    const user = await User.findById(req.userId);
     if (!user) {
         return res.json({
             auth: false,
             message: 'No user found'
         });
     }
+
+    req.user = user;
 
     next();
 
@@ -41,13 +42,13 @@ middleware.verifyToken = async (req, res, next) => {
 
 middleware.verifyMail = async (req, res, next) => {
     const {mail} = req.body;
-    const user = User.findOne({mail});
+    const user = await User.findOne({mail});
 
     if (user) {
         return res.status(401).json({
             auth: false,
             message: 'this email has already been registered'
-        })
+        });
     }
 
     next();

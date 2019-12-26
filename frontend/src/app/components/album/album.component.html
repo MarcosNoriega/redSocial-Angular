@@ -1,3 +1,70 @@
-<p>
-  album works!
-</p>
+<h1>{{album.nombre}}</h1>
+<hr>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Subir Foto
+</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-white">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title" id="exampleModalLabel">Subir Foto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body bg-dark">
+          <div class="form-group">
+            <label for="">Nombre</label>
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="foto.nombre">
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input type="checkbox" name="publico" class="form-check-input" [(ngModel)]="foto.publico">
+            <label for="" class="form-check-label">Público</label>
+          </div>
+
+          <div class="form-group">
+            <label for="">Descripción</label>
+            <textarea name="descripcion" class="form-control" id="" cols="30" rows="10" [(ngModel)]="foto.descripcion"></textarea>
+          </div>
+
+          <div class="form-group">
+            <input type="file" class="d-none" (change)="onChange($event)" #fotoInput>
+            <img [src]="fotoSelecionada || 'assets/image/no-image.png'" alt="" class="card-img-top" height="400px" (click)="fotoInput.click()">
+          </div>
+        </div>
+        <div class="modal-footer  bg-dark">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cerrar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="subirFoto()"><i class="fa fa-save"></i> Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="fotos.length == 0">
+  <div class="col">
+    <h1 class="text-center display-4" style="margin-top: 150px;">No tienes ninguna foto subida en este Album</h1>
+  </div>
+</div>
+
+<div class="row mt-4">
+    <div class="card-columns">
+      <div class="card sombra" *ngFor="let foto of fotos">
+        <img [src]="foto.ruta" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5>{{foto.nombre}}</h5>
+          <p>{{foto.descripcion}}</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-info" (click)="verFoto(foto._id)"><i class="fa fa-eye"></i></button>
+          <button class="btn btn-danger ml-2" (click)="deleteFoto(foto._id)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>

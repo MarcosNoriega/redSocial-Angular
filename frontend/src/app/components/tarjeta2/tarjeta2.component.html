@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4 mt-3" *ngFor="let foto of fotos" (click)="mostrarFoto(foto._id)">
-    <div class="card sombra">
+    <div class="card sombra" style="cursor: pointer">
       <img [src]="foto.ruta" alt="" class="card-img-top">
 
       <div class="card-body">

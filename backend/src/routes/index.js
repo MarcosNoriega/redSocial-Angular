@@ -15,14 +15,14 @@ router.post('/logout', middleware.verifyToken, userController.logout);
 router.get('/user/:id', middleware.verifyToken, userController.show);
 router.get('/user', middleware.verifyToken, userController.userAuth);
 router.post('/user/changePassword', middleware.verifyToken, userController.updatePassword);
-router.post('/user/update/:id', middleware.verifyToken, userController.update);
+router.put('/user/update/:id', middleware.verifyToken, userController.update);
 
 router.get('/images', middleware.verifyToken, imageController.index);
 router.get('/image/:id', middleware.verifyToken, imageController.show);
 router.post('/images/create', middleware.verifyToken, imageController.create);
 router.get('/images/album/:idAlbum', middleware.verifyToken, imageController.searchXalbum);
 router.delete('/images/delete/:id', middleware.verifyToken, imageController.delete);
-router.post('/images/edit/:id', middleware.verifyToken, imageController.update);
+router.put('/images/edit/:id', middleware.verifyToken, imageController.update);
 router.get('/contenido', middleware.verifyToken, imageController.getContenido);
 router.get('/images/user/:id', middleware.verifyToken, imageController.getImagesUser);
 router.get('/images/user/top5/:userId', middleware.verifyToken, imageController.getImagesUserTop5V);
@@ -32,7 +32,7 @@ router.post('/comment/create', middleware.verifyToken, commentController.create)
 router.delete('/comment/delete/:id', middleware.verifyToken, commentController.delete);
 router.get('/comment/:id', middleware.verifyToken, commentController.show);
 router.get('/comments/:idImagen', middleware.verifyToken, commentController.index);
-router.post('/comment/update/:id', middleware.verifyToken, commentController.update);
+router.put('/comment/update/:id', middleware.verifyToken, commentController.update);
 
 router.get('/album', middleware.verifyToken, albumController.index);
 router.post('/album/create', middleware.verifyToken, albumController.create);

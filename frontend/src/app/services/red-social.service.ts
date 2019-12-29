@@ -88,7 +88,7 @@ export class RedSocialService {
   }
 
   updateFoto(id: string, foto: Fotos) {
-    return this.http.post(this.url + `images/edit/${id}`, foto, {headers: this.header});
+    return this.http.put(this.url + `images/edit/${id}`, foto, {headers: this.header});
   }
 
   postComentarios(comentario: Comentario) {
@@ -114,7 +114,7 @@ export class RedSocialService {
   }
 
   updateCommentario(id: string, comment: Comentario) {
-    return this.http.post(this.url + `comment/update/${id}`, comment, {headers: this.header})
+    return this.http.put(this.url + `comment/update/${id}`, comment, {headers: this.header})
     .pipe(map(res => {
       return res['comment'];
     }));

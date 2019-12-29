@@ -91,7 +91,14 @@ userController.updatePassword = async (req, res) => {
 
 userController.update = async (req, res) => {
     const {id} = req.params;
-    const user = await User.findByIdAndUpdate(id, req.body);
+    const {name, surname, mail} = req.body;
+
+    const user = await User.findById(id);
+
+    user.name = name;
+    user.surname = surname;
+    user.mail = mail;
+    await user.save();
 
     res.json({message: 'successfy', user});
 }

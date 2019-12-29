@@ -111,7 +111,9 @@ export class PerfilComponent implements OnInit {
 
   updateUser() {
     this.auth.updateUser(this.user._id, this.userModif).subscribe(res => {
-      console.log(res);
+      console.log(res['user'].name);
+      localStorage.setItem('Nombre', res['user'].name);
+      localStorage.setItem('Apellido', res['user'].surname);
     });
    }
 

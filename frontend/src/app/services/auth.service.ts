@@ -43,8 +43,8 @@ export class AuthService {
   }
 
   updateUser(id: string, user: User) {
-    return this.http.post(this.url + `user/update/${id}`,
-    {name: user.name, surname: user.surname, mail: user.mail, password: user.password}, 
+    return this.http.put(this.url + `user/update/${id}`,
+    {name: user.name, surname: user.surname, mail: user.mail, password: user.password},
     {headers: this.header});
   }
 
